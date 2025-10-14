@@ -5,7 +5,8 @@
       "Bash(then echo \"lib exists\")",
       "Bash(else echo \"no lib folder\")",
       "Bash(fi)",
-      "Bash(npx prisma:*)"
+      "Bash(npx prisma:*)",
+      "Bash(npx shadcn@latest add:*)"
     ],
     "deny": [],
     "ask": []
