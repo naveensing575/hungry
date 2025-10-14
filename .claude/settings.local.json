@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(if [ -d \"lib\" ])",
+      "Bash(then echo \"lib exists\")",
+      "Bash(else echo \"no lib folder\")",
+      "Bash(fi)",
+      "Bash(npx prisma:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
