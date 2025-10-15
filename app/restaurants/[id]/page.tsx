@@ -8,17 +8,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { AddToCartButton } from "./add-to-cart-button";
 
-export default async function RestaurantDetailPage({ params }: { params: { id: string } }) {
+export default async function RestaurantDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
 
   if (!session?.user) {
     redirect("/login");
   }
 
+  const { id } = await params;
+
   // Fetch restaurant with menu items
   const restaurant = await prisma.restaurant.findUnique({
     where: {
-      id: params.id,
+      id,
     },
     include: {
       menuItems: {

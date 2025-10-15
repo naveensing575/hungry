@@ -141,7 +141,7 @@ export default async function Home() {
           </CardHeader>
           <CardContent className="prose prose-sm max-w-none">
             <p className="text-gray-700">
-              This is a role-based food ordering application built for the Slooze coding challenge.
+              This is a role-based food ordering application with country-based restaurant filtering.
               Your experience will vary based on your role:
             </p>
             <ul className="text-gray-700 space-y-1 mt-3">
