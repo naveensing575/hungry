@@ -134,7 +134,7 @@ export default async function RestaurantDetailPage({ params }: { params: Promise
             <CardContent className="py-12 text-center">
               <UtensilsCrossed className="w-16 h-16 mx-auto text-gray-300 mb-4" />
               <h3 className="text-xl font-semibold text-gray-700 mb-2">No Menu Items</h3>
-              <p className="text-gray-500">This restaurant hasn't added any menu items yet.</p>
+              <p className="text-gray-500">This restaurant hasn&apos;t added any menu items yet.</p>
             </CardContent>
           </Card>
         ) : (

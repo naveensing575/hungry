@@ -33,7 +33,8 @@ async function main() {
     },
   });
 
-  const memberUser = await prisma.user.create({
+  // Member user created for testing - not used for payment methods
+  await prisma.user.create({
     data: {
       email: 'member@test.com',
       password: hashedPassword,

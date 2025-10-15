@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Plus, Minus, Check } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 interface MenuItem {
   id: string;
@@ -17,10 +16,16 @@ interface AddToCartButtonProps {
   menuItem: MenuItem;
 }
 
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 export function AddToCartButton({ menuItem }: AddToCartButtonProps) {
   const [quantity, setQuantity] = useState(0);
   const [added, setAdded] = useState(false);
-  const router = useRouter();
 
   const addToCart = () => {
     // Get existing cart from localStorage
@@ -44,7 +49,7 @@ export function AddToCartButton({ menuItem }: AddToCartButtonProps) {
     cart.restaurantName = menuItem.restaurantName;
 
     // Check if item already exists in cart
-    const existingItem = cart.items.find((item: any) => item.id === menuItem.id);
+    const existingItem = cart.items.find((item: CartItem) => item.id === menuItem.id);
 
     if (existingItem) {
       existingItem.quantity += 1;
@@ -60,7 +65,7 @@ export function AddToCartButton({ menuItem }: AddToCartButtonProps) {
     // Save to localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    setQuantity((cart.items.find((item: any) => item.id === menuItem.id)?.quantity || 0));
+    setQuantity((cart.items.find((item: CartItem) => item.id === menuItem.id)?.quantity || 0));
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
 
@@ -73,12 +78,12 @@ export function AddToCartButton({ menuItem }: AddToCartButtonProps) {
     if (!cartJson) return;
 
     const cart = JSON.parse(cartJson);
-    const item = cart.items.find((item: any) => item.id === menuItem.id);
+    const item = cart.items.find((item: CartItem) => item.id === menuItem.id);
 
     if (item) {
       item.quantity += change;
       if (item.quantity <= 0) {
-        cart.items = cart.items.filter((item: any) => item.id !== menuItem.id);
+        cart.items = cart.items.filter((item: CartItem) => item.id !== menuItem.id);
         setQuantity(0);
       } else {
         setQuantity(item.quantity);
@@ -100,7 +105,7 @@ export function AddToCartButton({ menuItem }: AddToCartButtonProps) {
     const cartJson = localStorage.getItem("cart");
     if (cartJson) {
       const cart = JSON.parse(cartJson);
-      const item = cart.items.find((item: any) => item.id === menuItem.id);
+      const item = cart.items.find((item: CartItem) => item.id === menuItem.id);
       if (item) {
         setQuantity(item.quantity);
       }

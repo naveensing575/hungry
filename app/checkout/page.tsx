@@ -1,10 +1,9 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { UtensilsCrossed, ArrowLeft, CreditCard } from "lucide-react";
+import { CreditCard, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { CheckoutForm } from "./checkout-form";
 
 export default async function CheckoutPage() {

@@ -129,7 +129,7 @@ hungry/
 └── types/              # TypeScript definitions
 ```
 
-## 🗄️ Database Schema
+## Database Schema
 
 - **User**: Authentication & role management
 - **Restaurant**: Restaurant information with country
@@ -138,7 +138,7 @@ hungry/
 - **OrderItem**: Junction table for orders & menu items
 - **PaymentMethod**: User payment methods
 
-## 🛠️ Development
+## Development
 
 ```bash
 # Run development server
@@ -154,7 +154,7 @@ npx prisma generate
 npx prisma migrate dev --name <migration-name>
 ```
 
-## 🎨 Design Features
+## Design Features
 
 - Light color theme (orange/amber/yellow gradients)
 - Responsive design for all screen sizes
@@ -162,10 +162,10 @@ npx prisma migrate dev --name <migration-name>
 - Smooth transitions and hover states
 - Professional typography with Geist fonts
 
-## 📝 License
+## License
 
 MIT
 
 ---
 
-Built with ❤️ using Next.js 15
+Built with Next.js 15

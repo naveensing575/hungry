@@ -49,7 +49,7 @@ export async function POST(request: Request) {
         total: total,
         status: "CONFIRMED",
         orderItems: {
-          create: items.map((item: any) => ({
+          create: items.map((item: { id: string; quantity: number; price: number }) => ({
             menuItemId: item.id,
             quantity: item.quantity,
             price: item.price,
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const session = await auth();
 

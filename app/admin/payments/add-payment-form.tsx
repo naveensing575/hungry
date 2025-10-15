@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export function AddPaymentForm({ userId }: { userId: string }) {
+export function AddPaymentForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [cardType, setCardType] = useState("");

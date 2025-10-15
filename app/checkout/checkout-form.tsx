@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { CreditCard, Loader2, CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type { PaymentMethod } from "@prisma/client";

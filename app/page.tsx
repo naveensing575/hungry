@@ -56,7 +56,7 @@ export default async function Home() {
                 Welcome back, {session.user.name}! 👋
               </CardTitle>
               <CardDescription className="text-gray-600">
-                You're logged in as <span className="font-semibold text-orange-600">{session.user.role}</span>
+                You&apos;re logged in as <span className="font-semibold text-orange-600">{session.user.role}</span>
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -150,7 +150,7 @@ export default async function Home() {
               <li><strong>MEMBER:</strong> Can only view restaurants and create orders (no checkout)</li>
             </ul>
             <p className="text-gray-700 mt-3">
-              Restaurants are filtered by country - you'll only see options from <strong>{session.user.country}</strong>.
+              Restaurants are filtered by country - you&apos;ll only see options from <strong>{session.user.country}</strong>.
             </p>
           </CardContent>
         </Card>

@@ -64,7 +64,7 @@ export default async function AdminPaymentsPage() {
               <CardDescription>Add a new card for payments</CardDescription>
             </CardHeader>
             <CardContent>
-              <AddPaymentForm userId={session.user.id} />
+              <AddPaymentForm />
             </CardContent>
           </Card>
 
