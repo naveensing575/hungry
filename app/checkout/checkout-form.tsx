@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CreditCard, Loader2, CheckCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useLoading } from "@/lib/loading-context";
 import type { PaymentMethod } from "@prisma/client";
 import type { Session } from "next-auth";
 
@@ -28,6 +29,7 @@ interface Cart {
 
 export function CheckoutForm({ paymentMethods, session }: CheckoutFormProps) {
   const router = useRouter();
+  const { withLoading, startLoading } = useLoading();
   const [cart, setCart] = useState<Cart>({ items: [], restaurantId: null, restaurantName: null });
   const [selectedPayment, setSelectedPayment] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -66,33 +68,36 @@ export function CheckoutForm({ paymentMethods, session }: CheckoutFormProps) {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          restaurantId: cart.restaurantId,
-          items: cart.items,
-          total: total,
-          paymentMethodId: selectedPayment,
-        }),
-      });
+      await withLoading(async () => {
+        const response = await fetch("/api/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            restaurantId: cart.restaurantId,
+            items: cart.items,
+            total: total,
+            paymentMethodId: selectedPayment,
+          }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        setSuccess(true);
-        localStorage.removeItem("cart");
-        window.dispatchEvent(new Event("cartUpdated"));
+        if (response.ok) {
+          setSuccess(true);
+          localStorage.removeItem("cart");
+          window.dispatchEvent(new Event("cartUpdated"));
 
-        setTimeout(() => {
-          router.push(`/orders/${data.orderId}`);
-        }, 2000);
-      } else {
-        alert(data.error || "Failed to create order");
-        setLoading(false);
-      }
+          setTimeout(() => {
+            startLoading("Redirecting to order details...");
+            router.push(`/orders/${data.orderId}`);
+          }, 2000);
+        } else {
+          alert(data.error || "Failed to create order");
+          setLoading(false);
+        }
+      }, "Processing your order...");
     } catch (error) {
       console.error("Checkout error:", error);
       alert("An error occurred during checkout");
@@ -107,7 +112,10 @@ export function CheckoutForm({ paymentMethods, session }: CheckoutFormProps) {
           <p className="text-gray-600">Your cart is empty. Add items before checkout.</p>
           <Button
             className="mt-4 bg-gradient-to-r from-orange-400 to-amber-500 hover:from-orange-500 hover:to-amber-600"
-            onClick={() => router.push("/restaurants")}
+            onClick={() => {
+              startLoading("Loading restaurants...");
+              router.push("/restaurants");
+            }}
           >
             Browse Restaurants
           </Button>

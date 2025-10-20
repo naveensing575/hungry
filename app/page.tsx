@@ -2,8 +2,9 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { UtensilsCrossed, LogOut, User, MapPin } from "lucide-react";
+import { UtensilsCrossed, User, MapPin } from "lucide-react";
 import Link from "next/link";
+import { LogoutButton } from "@/components/logout-button";
 
 export default async function Home() {
   const session = await auth();
@@ -28,20 +29,7 @@ export default async function Home() {
                 <p className="text-xs text-gray-600">Food Ordering Platform</p>
               </div>
             </div>
-            <form action={async () => {
-              "use server";
-              const { signOut } = await import("@/lib/auth");
-              await signOut({ redirectTo: "/login" });
-            }}>
-              <Button
-                type="submit"
-                variant="outline"
-                className="border-gray-200 hover:bg-red-50 hover:text-red-600 hover:border-red-200"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
-              </Button>
-            </form>
+            <LogoutButton />
           </div>
         </div>
       </header>
